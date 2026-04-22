@@ -6,7 +6,6 @@ export const createIncident = async (req, res) => {
         const {type, severity, description, occurredAt} = req.body;
         const incident = await Incident.create({
             type,
-            description,
             severity,
             description,
             occurredAt,
@@ -29,7 +28,9 @@ export const createIncident = async (req, res) => {
 
 export const updateIncidentStatus = async (req, res) => {
     try{
-        const { status } = req.body;
+        //const { status } = req.body;
+        let { status } = req.body;
+            status = status.trim().toLowerCase();
         const incident = await Incident.findById(req.params.id);
 
         if(!incident){
@@ -38,6 +39,40 @@ export const updateIncidentStatus = async (req, res) => {
                 message: "Incident not found"
             });
         }
+        //prevent national admin from editing incident details
+        if (
+  req.user.role === "national_admin" &&
+  req.method === "PUT" &&
+  !req.body.status
+) {
+  return res.status(403).json({
+    success: false,
+    message: "National Admin cannot edit incident details"
+  });
+  const incident = await Incident.findById(req.params.id);
+
+const oldStatus = incident.status;
+
+// update status
+incident.status = req.body.status;
+
+await incident.save();
+
+// ✅ CREATE AUDIT LOG
+await AuditLog.create({
+  incident: incident._id,
+  changedBy: req.user.id,
+  fromStatus: oldStatus,
+  toStatus: req.body.status
+});
+  
+}
+            // if(req.user.role === "national_admin" && req.method === "PUT"){
+            //     return res.status(403).json({
+            //         success: false,
+            //         message: "National Admin cannot edit incident details"
+            //     });
+            // }
         //1 Role check
         //Prevent editing after submission (except status by authorized roles)
         const allowedRoles = ["district_officer", "regional_supervisor", "national_admin"];
@@ -47,6 +82,7 @@ export const updateIncidentStatus = async (req, res) => {
                 message: "not authorized to update incident status"
             });
         }
+
         //2 Status flow check
         //Status flows rules
         const statusFlows = {
@@ -68,23 +104,23 @@ export const updateIncidentStatus = async (req, res) => {
         
         //3 Role-specific check
         const roleStatusMap = {
-            district_officer: ["acknowledge"],
+            district_officer: ["acknowledged"],
             regional_supervisor: ["in_progress"],
             national_admin: ["resolved", "closed"]
         };
-        const userRole = req.user.role;
+        const userRole = req.user.role.trim().toLowerCase();
         if(!roleStatusMap[userRole] || !roleStatusMap[userRole].includes(status)) {
             return res.status(403).json({
                 success: false,
-                message: `${userRole} cannot set status to ${status}};` 
+                message: `${userRole} cannot set status to ${status}` 
             });
 
-            if (!roleStatusMap[userRole] || !roleStatusMap[userRole].includes(status)) {
-                return res.status(403).json({
-                        success: false,
-            message: `${userRole} cannot set status to ${status}. User Role: ${req.user.role}`
-  });
-}
+//             if (!roleStatusMap[userRole] || !roleStatusMap[userRole].includes(status)) {
+//                 return res.status(403).json({
+//                         success: false,
+//             message: `${userRole} cannot set status to ${status}. User Role: ${req.user.role}`
+//   });
+// }
         }
         const previousStatus = incident.status;
 
@@ -104,7 +140,6 @@ export const updateIncidentStatus = async (req, res) => {
             fromStatus: previousStatus,
             toStatus: status
         });
-
     }catch(error){
         res.status(500).json({
             success: false,

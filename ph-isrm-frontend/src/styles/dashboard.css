@@ -1,0 +1,236 @@
+
+body {
+  font-family: Arial, sans-serif;
+  background: #f5f7fa;
+  margin: 0;
+}
+
+/* Container */
+/* .container {
+  max-width: 800px;
+  margin: auto;
+  padding: 20px;
+} */
+
+/* Header */
+/* .header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+} */
+
+/* Card */
+/* .card {
+  background: white;
+  border-radius: 10px;
+  padding: 15px;
+  margin-top: 15px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+} */
+
+/* Inputs */
+/* input, select, textarea {
+  width: 100%;
+  padding: 8px;
+  margin-top: 8px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+} */
+
+/* Button */
+/* button {
+  margin-top: 10px;
+  padding: 8px 12px;
+  border: none;
+  border-radius: 6px;
+  background: #0d6efd;
+  color: white;
+  cursor: pointer;
+} */
+
+button:hover {
+  background: #0b5ed7;
+}
+
+/* Status badge */
+/* .badge {
+  padding: 4px 10px;
+  border-radius: 20px;
+  color: white;
+  font-size: 12px;
+} */
+
+/* Colors */
+/* .gray { background: #6c757d; }
+.blue { background: #0d6efd; }
+.orange { background: #fd7e14; }
+.green { background: #198754; }
+.black { background: #212529; } */
+
+/* Severity */
+/* .severity-high { color: red; font-weight: bold; }
+.severity-medium { color: orange; }
+.severity-low { color: green; } */
+
+/* Stats */
+/* .stats {
+  display: flex;
+  gap: 10px;
+  margin-top: 15px;
+}
+
+.stat-box {
+  flex: 1;
+  background: #eef2f7;
+  padding: 10px;
+  border-radius: 8px;
+  text-align: center;
+} */
+
+.container {
+  max-width: 900px;
+  margin: auto;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.card {
+  background: #fff;
+  padding: 15px;
+  margin-top: 15px;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+button {
+  padding: 6px 12px;
+  margin-top: 10px;
+  cursor: pointer;
+}
+
+select, textarea {
+  width: 100%;
+  margin-top: 10px;
+  padding: 8px;
+}
+
+/* Updated css */
+/* dashboard.css */
+
+body {
+  background: #f4f6f9;
+  font-family: Arial, sans-serif;
+}
+
+/* Layout */
+.dashboard {
+  padding: 20px;
+  max-width: 1200px;
+  margin: auto;
+}
+
+/* Top bar */
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.logout-btn {
+  background: #dc3545;
+  color: white;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.logout-btn:hover {
+  background: #bb2d3b;
+}
+
+.role {
+  margin-bottom: 20px;
+}
+
+/* Grid layout */
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+/* Panels */
+.panel {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+/* Buttons */
+.btn-group {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.btn-group button {
+  flex: 1;
+  padding: 10px;
+  border: none;
+  background: #0d6efd;
+  color: white;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.btn-group button:hover {
+  background: #0b5ed7;
+}
+
+/* Forms */
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.form input,
+.form select {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+
+.form button {
+  margin-top: 10px;
+  padding: 10px;
+  border: none;
+  background: #198754;
+  color: white;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.form button:hover {
+  background: #157347;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+
+  .btn-group {
+    flex-direction: column;
+  }
+}

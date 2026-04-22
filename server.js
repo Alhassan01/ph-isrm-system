@@ -7,6 +7,10 @@ import { protect } from './src/middlewares/authMiddleware.js';
 import { authorizeRoles } from './src/middlewares/roleMiddleware.js';  
 import taskRoutes from "./src/routes/taskRoutes.js";
 import incidentRoutes from "./src/routes/incidentRoutes.js";
+import cors from "cors";
+import auditRoutes from "./src/routes/auditRoutes.js";
+import facilityRoutes from "./src/routes/facilityRoutes.js";
+
 
 
 
@@ -17,6 +21,10 @@ connectDB();
 
 const app = express();
 
+//for frontend development, allow CORS from localhost:3000
+app.use(cors({
+  origin: "http://localhost:5173"
+}));
 app.use(express.json());
 //user routes
 app.use("/api", userRoutes);
@@ -27,7 +35,8 @@ app.use("/api/auth", authRoutes);
 app.use("/api", taskRoutes);
 
 // Incident routes
-app.use("/api", incidentRoutes);
+app.use("/api/incidents", incidentRoutes);
+
 
 //Protected route 
 app.get("/api/protected", protect, (req, res) => {
@@ -37,6 +46,11 @@ app.get("/api/protected", protect, (req, res) => {
         user: req.user
     });
 });
+//audit route
+app.use("/api/audit-Logs", auditRoutes);
+
+//facility routes
+app.use("/api", facilityRoutes)
 
 //Admin-only route. Protect route and check for admin role
 app.get("/api/admin", protect, authorizeRoles("national_admin"), (req, res) =>{
