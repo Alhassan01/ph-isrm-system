@@ -89,7 +89,6 @@ const createUser = async () => {
     await API.post("/users", {
       name: newUserName,
       email: newUserEmail,
-      
       role: newUserRole,
       password: "123456" // temp
     });
@@ -868,15 +867,6 @@ return (
     </div>
   </div>
 )}
-
- {/* FILTER */}
-       <select onChange={(e) => setFilter(e.target.value)}>
-         <option value="all">All</option>
-         <option value="submitted">Submitted</option>
-         <option value="in_progress">In Progress</option>
-         <option value="resolved">Resolved</option>
-       </select>
-
     {/*current facility form*/}
     {/* INCIDENT LIST */}
     <div className="card shadow-sm">

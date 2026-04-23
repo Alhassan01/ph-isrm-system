@@ -1,15 +1,28 @@
+// import express from 'express';
+// import dotenv from "dotenv";
+// import connectDB from "./src/config/db.js";
+// import userRoutes from "./src/routes/userRoutes.js";
+// import authRoutes from "./src/routes/authRoutes.js";
+// import { protect } from './src/middlewares/authMiddleware.js';
+// import { authorizeRoles } from './src/middlewares/roleMiddleware.js';  
+// import taskRoutes from "./src/routes/taskRoutes.js";
+// import incidentRoutes from "./src/routes/incidentRoutes.js";
+// import cors from "cors";
+// import auditRoutes from "./src/routes/auditRoutes.js";
+// import facilityRoutes from "./src/routes/facilityRoutes.js";
 import express from 'express';
 import dotenv from "dotenv";
-import connectDB from "./src/config/db.js";
-import userRoutes from "./src/routes/userRoutes.js";
-import authRoutes from "./src/routes/authRoutes.js";
-import { protect } from './src/middlewares/authMiddleware.js';
-import { authorizeRoles } from './src/middlewares/roleMiddleware.js';  
-import taskRoutes from "./src/routes/taskRoutes.js";
-import incidentRoutes from "./src/routes/incidentRoutes.js";
+import connectDB from "./config/db.js";
+import userRoutes from "./routes/userRoutes.js";
+import authRoutes from "./routes/authRoutes.js";
+import { protect } from './middlewares/authMiddleware.js';
+import { authorizeRoles } from './middlewares/roleMiddleware.js';  
+import taskRoutes from "./routes/taskRoutes.js";
+import incidentRoutes from "./routes/incidentRoutes.js";
 import cors from "cors";
-import auditRoutes from "./src/routes/auditRoutes.js";
-import facilityRoutes from "./src/routes/facilityRoutes.js";
+import auditRoutes from "./routes/auditRoutes.js";
+import facilityRoutes from "./routes/facilityRoutes.js";
+
 
 
 
@@ -22,8 +35,11 @@ connectDB();
 const app = express();
 
 //for frontend development, allow CORS from localhost:3000
+// app.use(cors({
+//   origin: "http://localhost:5173"
+// }));
 app.use(cors({
-  origin: "http://localhost:5173"
+  origin: "*"
 }));
 app.use(express.json());
 //user routes
