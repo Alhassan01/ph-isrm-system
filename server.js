@@ -12,7 +12,7 @@
 // import facilityRoutes from "./src/routes/facilityRoutes.js";
 import express from 'express';
 import dotenv from "dotenv";
-import connectDB from "./config/db.js";
+import connectDB from "./src/config/db.js";
 import userRoutes from "./routes/userRoutes.js";
 import authRoutes from "./routes/authRoutes.js";
 import { protect } from './middlewares/authMiddleware.js';
